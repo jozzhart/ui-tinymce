@@ -14,6 +14,13 @@ angular.module('ui.tinymce', [])
         if (!attrs.id) {
           attrs.$set('id', 'uiTinymce' + generatedIds++);
         }
+
+        if (attrs.uiTinymce) {
+          expression = scope.$eval(attrs.uiTinymce);
+        } else {
+          expression = {};
+        }
+
         options = {
           // Update model when calling setContent (such as from the source editor popup)
           setup: function (ed) {
@@ -30,7 +37,6 @@ angular.module('ui.tinymce', [])
             });
             // Update model on keypress
             ed.on('KeyUp', function (e) {
-              console.log(ed.isDirty());
               ed.save();
               ngModel.$setViewValue(elm.val());
               if (!scope.$$phase) {
@@ -41,14 +47,19 @@ angular.module('ui.tinymce', [])
           mode: 'exact',
           elements: attrs.id
         };
-        if (attrs.uiTinymce) {
-          expression = scope.$eval(attrs.uiTinymce);
-        } else {
-          expression = {};
+
+        var newOptions = {}
+
+        angular.extend(newOptions, options, uiTinymceConfig, expression);
+
+        newOptions.setup = function(ed) {
+          options.setup.apply(this, [ed]);
+          if(expression.setup) {
+            expression.setup.apply(this, [ed]);
         }
-        angular.extend(options, uiTinymceConfig, expression);
+
         setTimeout(function () {
-          tinymce.init(options);
+          tinymce.init(newOptions);
         });
 
 
