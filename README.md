@@ -5,7 +5,7 @@ This directive allows you to add a TinyMCE editor to your form elements.
 # Requirements
 
 - AngularJS
-- TinyMCE 3
+- TinyMCE 4
 
 # Testing
 
@@ -16,7 +16,7 @@ We use karma and jshint to ensure the quality of the code.  The easiest way to r
   bower install
   grunt
 
-The karma task will try to open Chrome as a browser in which to run the tests.  Make sure this is available or change the configuration in `test\test.config.js` 
+The karma task will try to open Chrome as a browser in which to run the tests.  Make sure this is available or change the configuration in `test\test.config.js`
 
 # Usage
 
