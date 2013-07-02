@@ -48,7 +48,7 @@ angular.module('ui.tinymce', [])
           elements: attrs.id
         };
 
-        var newOptions = {}
+        var newOptions = {};
 
         angular.extend(newOptions, options, uiTinymceConfig, expression);
 
@@ -56,12 +56,12 @@ angular.module('ui.tinymce', [])
           options.setup.apply(this, [ed]);
           if(expression.setup) {
             expression.setup.apply(this, [ed]);
-        }
+          }
+        };
 
         setTimeout(function () {
           tinymce.init(newOptions);
         });
-
 
         ngModel.$render = function() {
           if (!tinyInstance) {
